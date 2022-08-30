@@ -37,7 +37,7 @@ class JsonQ(object):
 
         :throws TypeError
         """
-        if isinstance(data, dict) or isinstance(data, list):
+        if isinstance(data, (dict, list)):
             self._raw_data = data
             self._json_data = copy.deepcopy(self._raw_data)
         else:
@@ -127,7 +127,7 @@ class JsonQ(object):
 
         :@return self
         """
-        if data and (isinstance(data, dict) or isinstance(data, list)):
+        if data and isinstance(data, (dict, list)):
             self._json_data = data
         else:
             self._json_data = copy.deepcopy(self._raw_data)
@@ -410,8 +410,8 @@ class JsonQ(object):
         self.__prepare()
         _new_content = []
 
-        while(len(self._json_data) > 0):
-            _new_content.append(self._json_data[0:size])
+        while (len(self._json_data) > 0):
+            _new_content.append(self._json_data[:size])
             self._json_data = self._json_data[size:]
 
         self._json_data = _new_content
